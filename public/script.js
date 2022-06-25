@@ -1,4 +1,3 @@
-// global value that holds info about the current hand.
 let currentGame = null;
 
 const displayDiceResult = document.getElementById('achess-die');
@@ -71,6 +70,7 @@ const createGame = function () {
   axios.post('/games')
     .then((response) => {
       currentGame = response.data;
+      renderGameState();
 
       console.log(currentGame);
     })

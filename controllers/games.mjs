@@ -240,12 +240,7 @@ export default function initGamesController(db) {
     gameStateToUpdate = { ...game.gameState };
 
     extractGameState();
-    // const {
-    //   currentPlayerTurn, playerPieceStatus, activePlayers, numPlayers,
-    // } = gameStateToUpdate;
 
-    // gameStateToUpdate.diceNumRolled = 1 + Math.floor(Math.random() * 6);
-    // gameStateToUpdate.canRollDice = false;
     diceNumRolled = 1 + Math.floor(Math.random() * 6);
     canRollDice = false;
 
@@ -276,21 +271,19 @@ export default function initGamesController(db) {
     const playerPieceNum = request.params.pieceId;
     if (currentPlayerTurn === pieceColor && canMovePiece) {
       executePieceMovements(pieceColor, playerPieceNum);
+      updateGameState();
+      await game.update({
+        gameState: gameStateToUpdate,
+
+      });
+
+      response.send({
+        id: game.id,
+        gameState: game.gameState,
+      });
     }
-    updateGameState();
-    await game.update({
-      gameState: gameStateToUpdate,
-
-    });
-
-    response.send({
-      id: game.id,
-      gameState: game.gameState,
-    });
   };
 
-  // return all functions we define in an object
-  // refer to the routes file above to see this used
   return {
     create,
     index,

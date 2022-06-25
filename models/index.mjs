@@ -11,7 +11,6 @@ const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-// add your model definitions to db here
 db.Game = gameModel(sequelize, Sequelize.DataTypes);
 
 db.sequelize = sequelize;
