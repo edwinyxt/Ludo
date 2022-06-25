@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ludo</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+
+  <div class="container" style="min: width 850px;">
+    <div class="row">
+      <div class="col">
+        <table border="0" cellspacing="0" style="margin-top:20px; margin-bottom:20px; width:820px;">
+          <tbody>
+            <tr>
+              <td>
+                <div class="ludoboard">
+                  <div class="red">
+                    <div class="playerzone">
+                      <div class="player"><span onclick="movePlayerPiece(this, 'red', 0)"
+                          class="rp r material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'red', 1)"
+                          class="rp r material-icons">flight</span></div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'red', 2)"
+                          class="rp r material-icons">flight</span></div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'red', 3)"
+                          class="rp r material-icons">flight</span></div>
+                    </div>
+                  </div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="green">
+                    <div class="playerzone">
+                      <div class="player"><span onclick="movePlayerPiece(this, 'green', 0)"
+                          class="rp g material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'green', 1)"
+                          class="rp g material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'green', 2)"
+                          class="rp g material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'green', 3)"
+                          class="rp g material-icons">flight</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="astep step"></div>
+                  <div class="astep greensafe"></div>
+                  <div class="astep gstop"></div>
+                  <div class="astep step"></div>
+                  <div class="astep greensafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep greensafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep greensafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep greensafe"></div>
+                  <div class="astep step"></div>
+
+                  <div class="astep step"></div>
+                  <div class="astep rstop"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+
+                  <div class="centerbox"></div>
+
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+
+                  <div class="astep step"></div>
+                  <div class="astep redsafe"></div>
+                  <div class="astep redsafe"></div>
+                  <div class="astep redsafe"></div>
+                  <div class="astep redsafe"></div>
+                  <div class="astep redsafe"></div>
+
+                  <div class="astep yellowsafe"></div>
+                  <div class="astep yellowsafe"></div>
+                  <div class="astep yellowsafe"></div>
+                  <div class="astep yellowsafe"></div>
+                  <div class="astep yellowsafe"></div>
+                  <div class="astep step"></div>
+
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep ystop"></div>
+                  <div class="astep step"></div>
+
+
+
+
+                  <div class="blue">
+                    <div class="playerzone">
+                      <div class="player"><span onclick="movePlayerPiece(this, 'blue', 0)"
+                          class="rp b material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'blue', 1)"
+                          class="rp b material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'blue', 2)"
+                          class="rp b material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'blue', 3)"
+                          class="rp b material-icons">flight</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="astep step"></div>
+                  <div class="astep bluesafe"></div>
+                  <div class="astep step"></div>
+                  <div class="yellow">
+                    <div class="playerzone">
+                      <div class="player"><span onclick="movePlayerPiece(this, 'yellow', 0)"
+                          class="rp y material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'yellow', 1)"
+                          class="rp y material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'yellow', 2)"
+                          class="rp y material-icons">flight</span>
+                      </div>
+                      <div class="player"><span onclick="movePlayerPiece(this, 'yellow', 3)"
+                          class="rp y material-icons">flight</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="astep step"></div>
+                  <div class="astep bluesafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep bluesafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep bluesafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep bstop"></div>
+                  <div class="astep bluesafe"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                  <div class="astep step"></div>
+                </div>
+              </td>
+              <td style="width:100%; padding-left:25px;">
+                <div id="achess-controlpanel" style="background-color: red; height: 280px;">
+                  <table border="0" cellspacing="0" style="width:100%;">
+                    <tbody>
+                      <tr style="vertical-align:top;">
+                        <td style="width:100%; padding:10px 0px 0px 0px;">
+                          <div id="achess-currentplayer" style="text-align:center;">PLAYER_COLOR's turn</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div style="padding:0px 10px 10px 10px;">
+                    <div id="achess-die"
+                      style="margin: 0px auto; width: 100px; height: 100px; background-image: url(&quot;/_images/dice_rolled6.png&quot;); background-size: 80%; background-position: center center; background-repeat: no-repeat;">
+                    </div>
+                    <div style="height:60px;">
+                      <div id="achess-rollbutton" style="padding-bottom: 5px; display: block;"><button
+                          onclick="rollDice()" style="width:100%; padding:5px 0px 5px 0px;">Roll Dice</button></div>
+                      <div id="achess-rollmessage"
+                        style="background-color: rgb(255, 255, 255); padding: 2px 4px; text-align: center; font-size: 16px; display: block; height: max-content;">
+                        You rolled a "DICENUMBER". You get another turn.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="border:1px solid #cfcfcf; background-color:#f0f0f0; padding:6px 4px 8px 4px;">
+
+                  <div style="margin-top:4px; text-align:center; font-size:12px;"><a href="javascript:createGame();"
+                      style="color:#303030;">Start New Game</a></div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
