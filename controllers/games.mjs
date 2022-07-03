@@ -116,7 +116,6 @@ const updateOccupiedSteps = function (pieceColor, playerPieceNum) {
 const executePieceMovements = function (pieceColor, playerPieceNum) {
   if (playerPieceStatus[pieceColor][playerPieceNum] === 'base' && diceNumRolled === 6) {
     updateOccupiedSteps(pieceColor, playerPieceNum);
-
     diceNumRolled = 0;
     canMovePiece = false;
     canRollDice = true;
@@ -124,19 +123,15 @@ const executePieceMovements = function (pieceColor, playerPieceNum) {
   }
   if (playerPieceStatus[pieceColor][playerPieceNum] === 'in_play') {
     updateOccupiedSteps(pieceColor, playerPieceNum);
-
     canMovePiece = false;
-
     // check final winning condition, down to last player?
     if (playerCompletedPiecesTracker[pieceColor] === 4) {
       const nextPlayerIndex = (activePlayers.indexOf(currentPlayerTurn) + 1) % numPlayers;
 
       if (numPlayers > 2) {
         currentPlayerTurn = activePlayers[nextPlayerIndex];
-
         diceNumRolled = 0;
         canRollDice = true;
-
         numPlayers--;
         activePlayers = activePlayers.filter((player) => player != pieceColor);
       } else { diceNumRolled = 'Game Completed';
@@ -145,9 +140,7 @@ const executePieceMovements = function (pieceColor, playerPieceNum) {
 
     else if (diceNumRolled != 6) {
       const nextPlayerIndex = (activePlayers.indexOf(currentPlayerTurn) + 1) % numPlayers;
-
       currentPlayerTurn = activePlayers[nextPlayerIndex];
-
       diceNumRolled = 0;
       canRollDice = true;
     } else {
@@ -157,15 +150,25 @@ const executePieceMovements = function (pieceColor, playerPieceNum) {
 };
 
 export default function initGamesController(db) {
+  // const index = (request, response) => {
+  //   response.render('games/index');
+  // };
+
   const index = (request, response) => {
-    response.render('games/index');
+    if (request.isUserLoggedIn === false) {
+      response.redirect('/login');
+    } else {
+      response.render('games/index');
+    }
   };
 
   const restore = async (request, response) => {
     try {
       const game = await db.Game.findAll({
-        limit: 1,
+        where: { userId: request.cookies.userId },
+
         order: [['createdAt', 'DESC']],
+        limit: 1,
       });
 
       response.send({
@@ -206,6 +209,7 @@ export default function initGamesController(db) {
       yellow: 0,
     };
     const newGame = {
+      userId: request.cookies.userId,
       gameState: {
         diceNumRolled,
         canMovePiece,
@@ -222,12 +226,9 @@ export default function initGamesController(db) {
 
     try {
       const game = await db.Game.create(newGame);
-
       response.send({
         id: game.id,
-
         gameState: game.gameState,
-
       });
     } catch (error) {
       response.status(500).send(error);
@@ -246,15 +247,13 @@ export default function initGamesController(db) {
 
     if (diceNumRolled < 6 && !playerPieceStatus[currentPlayerTurn].includes('in_play')) {
       const nextPlayerIndex = (activePlayers.indexOf(currentPlayerTurn) + 1) % numPlayers;
-
       currentPlayerTurn = activePlayers[nextPlayerIndex];
-
       canRollDice = true;
     } else { canMovePiece = true; }
+
     updateGameState();
     await game.update({
       gameState: gameStateToUpdate,
-
     });
 
     response.send({
@@ -274,7 +273,6 @@ export default function initGamesController(db) {
       updateGameState();
       await game.update({
         gameState: gameStateToUpdate,
-
       });
 
       response.send({
@@ -284,11 +282,20 @@ export default function initGamesController(db) {
     }
   };
 
+  const logout = (req, res) => {
+    console.log('do logout_123');
+    res.clearCookie('loggedIn');
+    res.clearCookie('userId');
+    res.clearCookie('loggedInHash');
+    res.send('cookie cleared??');
+  };
+
   return {
     create,
     index,
     rollDice,
     movePlayerPiece,
     restore,
+    logout,
   };
 }

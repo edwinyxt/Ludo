@@ -4,6 +4,8 @@ const displayDiceResult = document.getElementById('achess-die');
 const step = document.getElementsByClassName('astep');
 const base = document.getElementsByClassName('player');
 const controlPanel = document.getElementById('achess-controlpanel');
+const playerTurnTitle = document.getElementById('achess-currentplayer');
+const gameMessage = document.getElementById('achess-rollmessage');
 
 playerColors = {
   red: '#f7162d',
@@ -29,9 +31,25 @@ const restorelatestGameState = function () {
       console.log(error);
     });
 };
-
+const renderGameMessage = function () {
+  if (currentGame.gameState.canRollDice) {
+    gameMessage.innerHTML = 'Roll a 6 to leave the hangar.';
+    if (displayDiceResult.innerHTML === '6') { gameMessage.innerHTML = 'You rolled a 6. You get another turn.';
+    }
+  }
+  if (currentGame.gameState.canMovePiece) {
+    gameMessage.innerHTML = 'Click on the plane you want to move.';
+  }
+};
 const renderGameState = function () {
+//   Roll a 6 to leave the hangar.
+// Sorry. You have no available planes to move.
+// Click on the plane you want to move.
+// You rolled a 6. You get another turn.
   console.log('rendering game state');
+  const { currentPlayerTurn } = currentGame.gameState;
+  const currentPlayerText = currentPlayerTurn.charAt(0).toUpperCase() + currentPlayerTurn.slice(1);
+
   for (let i = 0; i < 72; i++) {
     const { occupiedStepsTracker } = currentGame.gameState;
     if (occupiedStepsTracker[i] != null) {
@@ -60,9 +78,10 @@ const renderGameState = function () {
     }
   }
   setTimeout(() => {
+    renderGameMessage();
     controlPanel.style.backgroundColor = playerColors[currentGame.gameState.currentPlayerTurn];
-
     displayDiceResult.innerHTML = currentGame.gameState.diceNumRolled;
+    playerTurnTitle.innerHTML = `${currentPlayerText}'s Turn`;
   }, 500);
 };
 
@@ -79,16 +98,33 @@ const createGame = function () {
     });
 };
 
+const logout = function () {
+  console.log('do logout');
+  axios
+    .post('/logout')
+    .then((response) => {
+      console.log(response.data);
+      // response.clearCookie('loggedIn');
+      // response.clearCookie('userId');
+      // response.clearCookie('loggedInHash');
+      location.reload(true);
+    })
+    .catch((error) => console.log(error));
+};
+
 const rollDice = function () {
   if (currentGame.gameState.canRollDice) {
     axios.put(`/games/roll-dice/${currentGame.id}`)
       .then((response) => {
         currentGame = response.data;
         displayDiceResult.innerHTML = currentGame.gameState.diceNumRolled;
+        gameMessage.innerHTML = 'Click on the plane you want to move.';
         if (!currentGame.gameState.canMovePiece) {
+          gameMessage.innerHTML = 'Sorry. You have no available planes to move.';
           setTimeout(() => {
             controlPanel.style.backgroundColor = playerColors[currentGame.gameState.currentPlayerTurn];
             displayDiceResult.innerHTML = 0;
+            gameMessage.innerHTML = 'Roll a 6 to leave the hangar.';
           }, 500); }
       })
       .catch((error) => {

@@ -6,6 +6,14 @@ export default function gameModel(sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      // This links the categoryId column to the id column in the categories table
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+    },
     gameState: {
       type: DataTypes.JSON,
     },
