@@ -184,8 +184,8 @@ export default function initGamesController(db) {
     diceNumRolled = null;
     canMovePiece = false;
     canRollDice = true;
-    numPlayers = 2;
-    activePlayers = ['red', 'green'];
+    numPlayers = 4;
+    activePlayers = ['red', 'green', 'yellow', 'blue'];
     currentPlayerTurn = 'red';
     playerPieceStatus = {
       red: ['base', 'base', 'base', 'base'],

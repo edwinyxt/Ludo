@@ -171,7 +171,7 @@
                 </div>
               </td>
               <td style="width:100%; padding-left:25px;">
-                <div id="achess-controlpanel" style="background-color: red; height: 280px;">
+                <div id="achess-controlpanel" style="background-color: lightgray; height: 280px;">
                   <table border="0" cellspacing="0" style="width:100%;">
                     <tbody>
                       <tr style="vertical-align:top;">
@@ -183,20 +183,32 @@
                   </table>
                   <div style="padding:0px 10px 10px 10px;">
                     <div id="achess-die"
-                      style="margin: 0px auto; width: 100px; height: 100px; background-image: url(&quot;/_images/dice_rolled6.png&quot;); background-size: 80%; background-position: center center; background-repeat: no-repeat;">
+                      style="margin: 0px auto; width: 100px; height: 100px; background-image: url('perspective-dice-six-faces-random.svg'); background-size: 80%; background-position: center center; background-repeat: no-repeat;font-size: 0pt;">
                     </div>
                     <div style="height:60px;">
                       <div id="achess-rollbutton" style="padding-bottom: 5px; display: block;"><button
                           onclick="rollDice()" style="width:100%; padding:5px 0px 5px 0px;">Roll Dice</button></div>
                       <div id="achess-rollmessage"
                         style="background-color: rgb(255, 255, 255); padding: 2px 4px; text-align: center; font-size: 16px; display: block; height: max-content;">
-                        You rolled a "DICENUMBER". You get another turn.
+
                       </div>
                     </div>
                   </div>
                 </div>
                 <div style="border:1px solid #cfcfcf; background-color:#f0f0f0; padding:6px 4px 8px 4px;">
-
+                  <!-- <div style="margin-top:4px; text-align:center; font-size:12px;">
+                    <label for="description">How many players?</label>
+                    <select name="num_players">
+                      <option value="2">
+                        2
+                      </option>
+                      <option value="3">
+                        3
+                      </option>
+                      <option value="4">
+                        4
+                      </option>
+                  </div> -->
                   <div style="margin-top:4px; text-align:center; font-size:12px;"><a href="javascript:createGame();"
                       style="color:#303030;">Start New Game</a></div>
 

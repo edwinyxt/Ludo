@@ -81,6 +81,7 @@ const renderGameState = function () {
     renderGameMessage();
     controlPanel.style.backgroundColor = playerColors[currentGame.gameState.currentPlayerTurn];
     displayDiceResult.innerHTML = currentGame.gameState.diceNumRolled;
+    displayDiceResult.style.backgroundImage = `url('dice-six-faces-${currentGame.gameState.diceNumRolled}.svg')`;
     playerTurnTitle.innerHTML = `${currentPlayerText}'s Turn`;
   }, 500);
 };
@@ -118,13 +119,20 @@ const rollDice = function () {
       .then((response) => {
         currentGame = response.data;
         displayDiceResult.innerHTML = currentGame.gameState.diceNumRolled;
+        displayDiceResult.style.backgroundImage = `url('dice-six-faces-${currentGame.gameState.diceNumRolled}.svg')`;
         gameMessage.innerHTML = 'Click on the plane you want to move.';
         if (!currentGame.gameState.canMovePiece) {
           gameMessage.innerHTML = 'Sorry. You have no available planes to move.';
           setTimeout(() => {
             controlPanel.style.backgroundColor = playerColors[currentGame.gameState.currentPlayerTurn];
+
             displayDiceResult.innerHTML = 0;
+            displayDiceResult.style.backgroundImage = "url('dice-six-faces-0.svg')";
             gameMessage.innerHTML = 'Roll a 6 to leave the hangar.';
+
+            const { currentPlayerTurn } = currentGame.gameState;
+            const currentPlayerText = currentPlayerTurn.charAt(0).toUpperCase() + currentPlayerTurn.slice(1);
+            playerTurnTitle.innerHTML = `${currentPlayerText}'s Turn`;
           }, 500); }
       })
       .catch((error) => {
