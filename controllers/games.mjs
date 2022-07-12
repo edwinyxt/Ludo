@@ -150,10 +150,6 @@ const executePieceMovements = function (pieceColor, playerPieceNum) {
 };
 
 export default function initGamesController(db) {
-  // const index = (request, response) => {
-  //   response.render('games/index');
-  // };
-
   const index = (request, response) => {
     if (request.isUserLoggedIn === false) {
       response.redirect('/login');

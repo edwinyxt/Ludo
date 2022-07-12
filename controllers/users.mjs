@@ -36,7 +36,7 @@ export default function initUsersController(db) {
         res.cookie('loggedInHash', hashedCookieString);
         res.cookie('loggedIn', true);
         res.cookie('userId', user.id);
-        // res.send({ user });
+
         res.redirect('/');
       } else {
         console.log('not logged in ');

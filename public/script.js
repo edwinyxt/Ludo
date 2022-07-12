@@ -42,10 +42,6 @@ const renderGameMessage = function () {
   }
 };
 const renderGameState = function () {
-//   Roll a 6 to leave the hangar.
-// Sorry. You have no available planes to move.
-// Click on the plane you want to move.
-// You rolled a 6. You get another turn.
   console.log('rendering game state');
   const { currentPlayerTurn } = currentGame.gameState;
   const currentPlayerText = currentPlayerTurn.charAt(0).toUpperCase() + currentPlayerTurn.slice(1);
@@ -105,9 +101,7 @@ const logout = function () {
     .post('/logout')
     .then((response) => {
       console.log(response.data);
-      // response.clearCookie('loggedIn');
-      // response.clearCookie('userId');
-      // response.clearCookie('loggedInHash');
+
       location.reload(true);
     })
     .catch((error) => console.log(error));
